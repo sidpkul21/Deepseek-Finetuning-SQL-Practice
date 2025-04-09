@@ -176,3 +176,19 @@ cython_debug/
 # Ignore the entire wandb folder:
 wandb/
 wandb_debug.log
+
+# HuggingFace Trainer output
+**/checkpoint-*/
+**/adapter_model.safetensors
+**/adapter_config.json
+**/optimizer.pt
+**/trainer_state.json
+**/training_args.bin
+**/scaler.pt
+**/scheduler.pt
+**/rng_state.pth
+
+# PyTorch / cache
+*.pt
+*.bin
+*.safetensors
