@@ -28,16 +28,17 @@ adapter_path = "./notebooks/deepseek-coder-qlora-sql/checkpoint-3750"
 model_finetune_v1 = PeftModel.from_pretrained(base_model, adapter_path)
 
 # Inference function
-def generate_sql(prompt, max_tokens=512):
+def generate_sql(prompt, max_tokens=256):
     inputs = tokenizer(prompt, return_tensors="pt").to(model_finetune_v1.device)
     
     outputs = model_finetune_v1.generate(
         **inputs,
-        max_new_tokens=max_tokens,
+        do_sample=True,
+        temperature=0.7,
+        top_p=0.95,
         eos_token_id=tokenizer.eos_token_id,
         pad_token_id=tokenizer.eos_token_id,
-        repetition_penalty=1.2,  # Add repetition penalty
-        no_repeat_ngram_size=3,  # Prevent repeating 3-grams
+        max_new_tokens=max_tokens
     )
 
     decoded = tokenizer.decode(outputs[0], skip_special_tokens=True)
