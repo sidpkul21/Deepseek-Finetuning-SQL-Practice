@@ -192,3 +192,6 @@ wandb_debug.log
 *.pt
 *.bin
 *.safetensors
+
+#gradio
+*.pem
